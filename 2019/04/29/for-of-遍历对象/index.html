@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+  
+  
+    <meta name="keywords" content="javascript,es6," />
+  
+
+  
+    <meta name="description" content="for-of 遍历对象" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>for-of 遍历对象 [ 尚治国的博客 ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/xoxo.css">
+    
+  
+</head>
+
+
+<body>
+  <div class="nav-container">
+    <nav class="home-menu pure-menu pure-menu-horizontal">
+  <a class="pure-menu-heading" href="/">
+    <img class="avatar" src="/images/logo.png">
+    <span class="title">尚治国的博客</span>
+  </a>
+
+  <ul class="pure-menu-list clearfix">
+      
+          
+            <li class="pure-menu-item"><a href="/" class="pure-menu-link">首页</a></li>
+          
+      
+          
+            <li class="pure-menu-item"><a href="/archives" class="pure-menu-link">归档</a></li>
+          
+      
+          
+            <li class="pure-menu-item"><a href="/tags" class="pure-menu-link">标签</a></li>
+          
+      
+          
+            <li class="pure-menu-item"><a href="/about" class="pure-menu-link">关于</a></li>
+          
+      
+  </ul>
+   
+</nav>
+  </div>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">
+        for-of 遍历对象
+      </h1>
+      <span>
+        
+        <time class="time" datetime="2019-04-29T09:20:20.000Z">
+        2019-04-29
+      </time>
+        
+      </span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+      <span class="post-tags">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+      </span>
+    </span>
+      <span class="slash">/</span>
+      <span class="read">
+      <span id="busuanzi_value_page_pv"></span> 点击
+    </span>
+      <span class="slash">/</span>
+      <span class="read">阅读耗时 5 分钟</span>
+    </header>
+
+    <div class="post-content">
+      <h1 id="Iterator-接口"><a href="#Iterator-接口" class="headerlink" title="Iterator 接口"></a>Iterator 接口</h1><p>Iterator 接口的目的，就是为所有数据结构，提供了一种统一的访问机制，即<code>for…of</code>循环。当使用<code>for…of</code>循环遍历某种数据结构时，该循环会自动去寻找 Iterator 接口。一种数据结构只要部署了 Iterator 接口，我们就称这种数据结构是“可遍历的”（iterable）。  </p>
+<p>ES6 规定，默认的 Iterator 接口部署在数据结构的<code>Symbol.iterator</code>属性，或者说，一个数据结构只要具有<code>Symbol.iterator</code>属性，就可以认为是“可遍历的”（iterable）。  </p>
+<p><code>Symbol.iterator</code>属性本身是一个函数，就是当前数据结构默认的遍历器生成函数。执行这个函数，就会返回一个遍历器。至于属性名<code>Symbol.iterator</code>，它是一个表达式，返回 Symbol 对象的 iterator 属性，这是一个预定义好的、类型为 Symbol 的特殊值，所以要放在方括号内。  </p>
+<p>对象进行for…of循环时，会调用Symbol.iterator方法，返回该对象的默认遍历器：</p>
+<p>1、添加 next 方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">  [Symbol.iterator] () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      next () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">          value: 1,</span><br><span class="line">          done: true</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、Generator：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Collection &#123;</span><br><span class="line">  *[Symbol.iterator] () &#123;</span><br><span class="line">    let i = 0</span><br><span class="line">    while(this[i] !== undefined) &#123;</span><br><span class="line">      yield this[i]</span><br><span class="line">      ++i</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let myCollection = new Collection()</span><br><span class="line">myCollection[0] = 1</span><br><span class="line">myCollection[1] = 2</span><br><span class="line">for(let value of myCollection) &#123;</span><br><span class="line">  console.log(value)</span><br><span class="line">&#125;</span><br><span class="line">// 1</span><br><span class="line">// 2</span><br></pre></td></tr></table></figure>
+
+<p>由于<code>Generator</code>函数就是遍历器生成函数，因此可以把<code>Generator</code>赋值给对象的<code>Symbol.iterator</code>属性，从而使得该对象具有<code>Iterator</code>接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var myIterable = &#123;&#125;</span><br><span class="line">myIterable[Symbol.iterator] = function* () &#123;</span><br><span class="line">  yield 1</span><br><span class="line">  yield 2</span><br><span class="line">  yield 3</span><br><span class="line">&#125;</span><br><span class="line">[...myIterable] // [1, 2, 3]</span><br></pre></td></tr></table></figure>
+
+<p>下面是原生具备<code>Iterator</code>接口的数据结构：</p>
+<ul>
+<li>Array</li>
+<li>Map</li>
+<li>Set</li>
+<li>String</li>
+<li>TypedArray</li>
+<li>函数的 arguments 对象</li>
+<li>NodeList 对象  </li>
+</ul>
+<p>也就是数组和类数组才有<code>Symbol.iterator</code>属性，而 Object 是没有的。<br>那么怎么做到使<code>对象可遍历</code>？</p>
+<h1 id="方法一：部署-Iterator-接口（在-Symbol-iterator-的属性上部署遍历器生成方法）"><a href="#方法一：部署-Iterator-接口（在-Symbol-iterator-的属性上部署遍历器生成方法）" class="headerlink" title="方法一：部署 Iterator 接口（在 Symbol.iterator 的属性上部署遍历器生成方法）"></a>方法一：部署 Iterator 接口（在 Symbol.iterator 的属性上部署遍历器生成方法）</h1><p>一个对象如果要具备可被<code>for…of</code>循环调用的 Iterator 接口，就必须在<code>Symbol.iterator</code>的属性上部署遍历器生成方法（原型链上的对象具有该方法也可）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class RangeIterator &#123;</span><br><span class="line">  constructor(start, stop) &#123;</span><br><span class="line">    this.value = start</span><br><span class="line">    this.stop = stop</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  [Symbol.iterator]() &#123; return this &#125;</span><br><span class="line"></span><br><span class="line">  next() &#123;</span><br><span class="line">    var value = this.value</span><br><span class="line">    if (value &lt; this.stop) &#123;</span><br><span class="line">      this.value++</span><br><span class="line">      return &#123;done: false, value: value&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return &#123;done: true, value: undefined&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function range(start, stop) &#123;</span><br><span class="line">  return new RangeIterator(start, stop)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for (var value of range(0, 3)) &#123;</span><br><span class="line">  console.log(value) // 0, 1, 2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法二：使用-Object-keys"><a href="#方法二：使用-Object-keys" class="headerlink" title="方法二：使用 Object.keys"></a>方法二：使用 Object.keys</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (var key of Object.keys(someObject)) &#123;</span><br><span class="line"> console.log(key + &apos;: &apos; + someObject[key])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法三：使用-Generator-函数将对象重新包装"><a href="#方法三：使用-Generator-函数将对象重新包装" class="headerlink" title="方法三：使用 Generator 函数将对象重新包装"></a>方法三：使用 Generator 函数将对象重新包装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function* entries(obj) &#123;</span><br><span class="line">  for (let key of Object.keys(obj)) &#123;</span><br><span class="line">    yield [key, obj[key]]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for (let [key, value] of entries(obj)) &#123;</span><br><span class="line">  console.log(key, &apos;-&gt;&apos;, value)</span><br><span class="line">&#125;</span><br><span class="line">// a -&gt; 1</span><br><span class="line">// b -&gt; 2</span><br><span class="line">// c -&gt; 3</span><br></pre></td></tr></table></figure>
+
+<h1 id="方法四：使用-Map-代替对象"><a href="#方法四：使用-Map-代替对象" class="headerlink" title="方法四：使用 Map 代替对象"></a>方法四：使用 Map 代替对象</h1>
+    </div>
+
+  </article>
+  <div class="toc-container">
+    
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Iterator-接口"><span class="toc-text">Iterator 接口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法一：部署-Iterator-接口（在-Symbol-iterator-的属性上部署遍历器生成方法）"><span class="toc-text">方法一：部署 Iterator 接口（在 Symbol.iterator 的属性上部署遍历器生成方法）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法二：使用-Object-keys"><span class="toc-text">方法二：使用 Object.keys</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法三：使用-Generator-函数将对象重新包装"><span class="toc-text">方法三：使用 Generator 函数将对象重新包装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法四：使用-Map-代替对象"><span class="toc-text">方法四：使用 Map 代替对象</span></a></li></ol>
+  </div>
+
+
+  </div>
+</div>
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/2018/12/09/Hexo-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="next" title="Hexo 搭建博客">
+          Hexo 搭建博客
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+          
+          <a href="/2019/05/05/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="prev" title="Linux 常用命令">
+            Linux 常用命令
+          </a>
+          <span>〉</span>
+        
+      </div>
+    </div>
+  
+
+    </div>
+
+    
+
+  </div>
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+        <a class="bottom-item" href="https://www.shangkaii.com" target="_blank" rel="noopener">首页</a> |
+        <a class="bottom-item" href="http://www.beian.miit.gov.cn" target="_blank">豫ICP备16031749号</a> |
+        <a class="bottom-item" href="https://hexo.io" target="_blank">Powered by hexo</a>
+    </div>
+</footer>
+  
+
+<script>
+  (function(window, document, undefined) {
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+    var hearts = [];
+    window.requestAnimationFrame = (function() {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function(callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+    init();
+
+    function init() {
+      css(".heart{z-index:9999;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: absolute;}.heart:after{top: -5px;}.heart:before{left: -5px;}");
+      attachEvent();
+      gameloop();
+      addMenuEvent();
+    }
+
+    function gameloop() {
+      for (var i = 0; i < hearts.length; i++) {
+        if (hearts[i].alpha <= 0) {
+          document.body.removeChild(hearts[i].el);
+          hearts.splice(i, 1);
+          continue;
+        }
+        hearts[i].y--;
+        hearts[i].scale += 0.004;
+        hearts[i].alpha -= 0.013;
+        hearts[i].el.style.cssText = "left:" + hearts[i].x + "px;top:" + hearts[i].y + "px;opacity:" + hearts[i].alpha + ";transform:scale(" + hearts[i].scale + "," + hearts[i].scale + ") rotate(45deg);background:" + hearts[i].color;
+      }
+      requestAnimationFrame(gameloop);
+    }
+
+    /**
+     * 给logo设置点击事件
+     * 
+     * - 回到顶部
+     * - 出现爱心
+     */
+    function attachEvent() {
+      var old = typeof window.onclick === "function" && window.onclick;
+      var logo = document.getElementById("logo");
+      if (logo) {
+        logo.onclick = function(event) {
+          returnTop();
+          old && old();
+          createHeart(event);
+        }
+      }
+      
+    }
+
+    function createHeart(event) {
+      var d = document.createElement("div");
+      d.className = "heart";
+      hearts.push({
+        el: d,
+        x: event.clientX - 5,
+        y: event.clientY - 5,
+        scale: 1,
+        alpha: 1,
+        color: randomColor()
+      });
+      document.body.appendChild(d);
+    }
+
+    function css(css) {
+      var style = document.createElement("style");
+      style.type = "text/css";
+      try {
+        style.appendChild(document.createTextNode(css));
+      } catch (ex) {
+        style.styleSheet.cssText = css;
+      }
+      document.getElementsByTagName('head')[0].appendChild(style);
+    }
+
+    function randomColor() {
+      // return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + ")";
+      return "#F44336";
+    }
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        if (toc) {
+          menu.onclick = function() {
+            if (toc) {
+              if (toc.style.display == 'block') {
+                toc.style.display = 'none';
+              } else {
+                toc.style.display = 'block';
+              }
+            }
+          };
+        } else {
+          menu.style.display = 'none';
+        }
+      }
+    }
+
+  })(window, document);
+</script>
+
+  
+
+
+
+</body>
+</html>

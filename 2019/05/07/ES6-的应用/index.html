@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#202020"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+  
+  
+    <meta name="keywords" content="javascript,es6," />
+  
+
+  
+    <meta name="description" content="ES6 的应用" />
+  
+  
+  <link rel="icon" type="image/x-icon" href="/logo.png">
+  <title>ES6 的应用 [ 尚治国的博客 ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css">
+    
+      <link rel="stylesheet" href="/css/xoxo.css">
+    
+  
+</head>
+
+
+<body>
+  <div class="nav-container">
+    <nav class="home-menu pure-menu pure-menu-horizontal">
+  <a class="pure-menu-heading" href="/">
+    <img class="avatar" src="/images/logo.png">
+    <span class="title">尚治国的博客</span>
+  </a>
+
+  <ul class="pure-menu-list clearfix">
+      
+          
+            <li class="pure-menu-item"><a href="/" class="pure-menu-link">首页</a></li>
+          
+      
+          
+            <li class="pure-menu-item"><a href="/archives" class="pure-menu-link">归档</a></li>
+          
+      
+          
+            <li class="pure-menu-item"><a href="/tags" class="pure-menu-link">标签</a></li>
+          
+      
+          
+            <li class="pure-menu-item"><a href="/about" class="pure-menu-link">关于</a></li>
+          
+      
+  </ul>
+   
+</nav>
+  </div>
+
+  <div class="container" id="content-outer">
+    <div class="inner" id="content-inner">
+      <div class="post-container">
+  <article class="post" id="post">
+    <header class="post-header text-center">
+      <h1 class="title">
+        ES6 的应用
+      </h1>
+      <span>
+        
+        <time class="time" datetime="2019-05-07T04:52:11.000Z">
+        2019-05-07
+      </time>
+        
+      </span>
+      <span class="slash">/</span>
+      <span class="post-meta">
+      <span class="post-tags">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+      </span>
+    </span>
+      <span class="slash">/</span>
+      <span class="read">
+      <span id="busuanzi_value_page_pv"></span> 点击
+    </span>
+      <span class="slash">/</span>
+      <span class="read">阅读耗时 11 分钟</span>
+    </header>
+
+    <div class="post-content">
+      <h1 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h1><h2 id="移除不想要的属性"><a href="#移除不想要的属性" class="headerlink" title="移除不想要的属性"></a>移除不想要的属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 移除 _internal 和 tooBig 这两个属性</span><br><span class="line">let &#123;</span><br><span class="line">  _internal,</span><br><span class="line">  tooBig,</span><br><span class="line">  ...cleanObject</span><br><span class="line">&#125; = &#123;</span><br><span class="line">  _internal: &quot;secret&quot;,</span><br><span class="line">  tooBig: &#123;&#125;,</span><br><span class="line">  el1: &apos;1&apos;,</span><br><span class="line">  el2: &apos;2&apos;,</span><br><span class="line">  el3: &apos;3&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(cleanObject) // &#123; el1: &apos;1&apos;, el2: &apos;2&apos;, el3: &apos;3&apos; &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">  name: &apos;peter&apos;,</span><br><span class="line">  gender: &apos;male&apos;,</span><br><span class="line">  other: &#123;</span><br><span class="line">    age: &apos;28&apos;,</span><br><span class="line">    height: &apos;180&apos;,</span><br><span class="line">    weight: &apos;160&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const &#123; other: &#123; age, ...rest2 &#125;, ...rest1 &#125; = obj</span><br><span class="line">const person = &#123;</span><br><span class="line">  ...rest1,</span><br><span class="line">  ...rest2,</span><br><span class="line">  age: Number(age)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(rest1)  //  &#123; name: &apos;peter&apos;, gender: &apos;male&apos; &#125;</span><br><span class="line">console.log(rest2)  //  &#123; height: &apos;180&apos;, weight: &apos;160&apos; &#125;</span><br><span class="line">console.log(person)  //  &#123; name: &apos;peter&apos;, gender: &apos;male&apos;, height: &apos;180&apos;, weight: &apos;160&apos;, age: 28 &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在函数参数中使用嵌套对象解构"><a href="#在函数参数中使用嵌套对象解构" class="headerlink" title="在函数参数中使用嵌套对象解构"></a>在函数参数中使用嵌套对象解构</h2><p>在这个例子中 engine 是一个嵌套在 car 里面的对象，如果我们只需要 engine 里面的属性 vin 我们可以这样做。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const car = &#123;</span><br><span class="line">  model: &apos;bmw 2018&apos;,</span><br><span class="line">  engine: &#123;</span><br><span class="line">    v6: true,</span><br><span class="line">    turbo: true,</span><br><span class="line">    vin: 12345</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const modelAndVIN = (&#123; model, engine: &#123; vin &#125; &#125;) =&gt; &#123;</span><br><span class="line">  console.log(`model: $&#123;model&#125; vin: $&#123;vin&#125;`)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">modelAndVIN(car) // model: bmw 2018  vin: 12345</span><br></pre></td></tr></table></figure>
+
+<h2 id="合并对象"><a href="#合并对象" class="headerlink" title="合并对象"></a>合并对象</h2><p>扩展运算符…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let object1 = &#123; a:1, b:2,c:3 &#125;</span><br><span class="line">let object2 = &#123; b:30, c:40, d:50 &#125;</span><br><span class="line">let merged = &#123; …object1, …object2 &#125; //spread and re-add into merged</span><br></pre></td></tr></table></figure>
+
+<h2 id="根据条件添加对象属性"><a href="#根据条件添加对象属性" class="headerlink" title="根据条件添加对象属性"></a>根据条件添加对象属性</h2><p>你不再需要根据条件创建两个不同的对象，以使其具有特定属性。扩展操作符将是一个完美的选择</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const getUser = (emailIncluded) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    name: &apos;John&apos;,</span><br><span class="line">    surname: &apos;Doe&apos;,</span><br><span class="line">    ...(emailIncluded ? &#123; email : &apos;john@doe.com&apos; &#125; : null)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const user = getUser(true)</span><br><span class="line">console.log(user); // 输出 &#123; name: &quot;John&quot;, surname: &quot;Doe&quot;, email: &quot;john@doe.com&quot; &#125;</span><br><span class="line"></span><br><span class="line">const userWithoutEmail = getUser(false)</span><br><span class="line">console.log(userWithoutEmail) // 输出 &#123; name: &quot;John&quot;, surname: &quot;Doe&quot; &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解构原始数据"><a href="#解构原始数据" class="headerlink" title="解构原始数据"></a>解构原始数据</h2><p>你曾经有处理过拥有非常多属性的对象吗？我相信你一定有过。可能最常见的情况是我们有一个用户对象，它包含了所有的数据和细节。这里，我们可以调用新的 ES 解构方法来处理这个大麻烦。让我们看看下面的例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const rawUser = &#123;</span><br><span class="line">  name: &apos;John&apos;,</span><br><span class="line">  surname: &apos;Doe&apos;,</span><br><span class="line">  email: &apos;john@doe.com&apos;,</span><br><span class="line">  displayName: &apos;SuperCoolJohn&apos;,</span><br><span class="line">  joined: &apos;2016-05-05&apos;,</span><br><span class="line">  image: &apos;path-to-the-image&apos;,</span><br><span class="line">  followers: 45</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let user = &#123;&#125;, userDetails = &#123;&#125;;</span><br><span class="line">(&#123; name: user.name, surname: user.surname, ...userDetails &#125; = rawUser);</span><br><span class="line"></span><br><span class="line">console.log(user) // 输出 &#123; name: &quot;John&quot;, surname: &quot;Doe&quot; &#125;</span><br><span class="line">console.log(userDetails) // 输出 &#123; email: &quot;john@doe.com&quot;, displayName: &quot;SuperCoolJohn&quot;, joined: &quot;2016-05-05&quot;, image: &quot;path-to-the-image&quot;, followers: 45 &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="合并对象数组"><a href="#合并对象数组" class="headerlink" title="合并对象数组"></a>合并对象数组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">// 将对象数组合并成一个对象</span><br><span class="line">const cities = [</span><br><span class="line">  &#123; name: &apos;Paris&apos;, visited: &apos;no&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Lyon&apos;, visited: &apos;no&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Marseille&apos;, visited: &apos;yes&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Rome&apos;, visited: &apos;yes&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Milan&apos;, visited: &apos;no&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Palermo&apos;, visited: &apos;yes&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Genoa&apos;, visited: &apos;yes&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Berlin&apos;, visited: &apos;no&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Hamburg&apos;, visited: &apos;yes&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;New York&apos;, visited: &apos;yes&apos; &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">const result = cities.reduce((accumulator, item) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    ...accumulator,</span><br><span class="line">    [item.name]: item.visited</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, &#123;&#125;)</span><br><span class="line"></span><br><span class="line">console.log(result)</span><br><span class="line">/* 输出</span><br><span class="line">&#123;</span><br><span class="line">  Berlin: &quot;no&quot;</span><br><span class="line">  Genoa: &quot;yes&quot;</span><br><span class="line">  Hamburg: &quot;yes&quot;</span><br><span class="line">  Lyon: &quot;no&quot;</span><br><span class="line">  Marseille: &quot;yes&quot;</span><br><span class="line">  Milan: &quot;no&quot;</span><br><span class="line">  New York: &quot;yes&quot;</span><br><span class="line">  Palermo: &quot;yes&quot;</span><br><span class="line">  Paris: &quot;no&quot;</span><br><span class="line">  Rome: &quot;yes&quot;</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组映射"><a href="#数组映射" class="headerlink" title="数组映射"></a>数组映射</h2><p>不使用 Array.map</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const cities = [</span><br><span class="line">  &#123; name: &apos;Paris&apos;, visited: &apos;no&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Lyon&apos;, visited: &apos;no&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Marseille&apos;, visited: &apos;yes&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Rome&apos;, visited: &apos;yes&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Milan&apos;, visited: &apos;no&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Palermo&apos;, visited: &apos;yes&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Genoa&apos;, visited: &apos;yes&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Berlin&apos;, visited: &apos;no&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;Hamburg&apos;, visited: &apos;yes&apos; &#125;,</span><br><span class="line">  &#123; name: &apos;New York&apos;, visited: &apos;yes&apos; &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">const cityNames = Array.from(cities, (&#123; name&#125;) =&gt; name)</span><br><span class="line">console.log(cityNames)</span><br><span class="line">// 输出 [&quot;Paris&quot;, &quot;Lyon&quot;, &quot;Marseille&quot;, &quot;Rome&quot;, &quot;Milan&quot;, &quot;Palermo&quot;, &quot;Genoa&quot;, &quot;Berlin&quot;, &quot;Hamburg&quot;, &quot;New York&quot;]</span><br></pre></td></tr></table></figure>
+
+<h1 id="数组的解构"><a href="#数组的解构" class="headerlink" title="数组的解构"></a>数组的解构</h1><h2 id="交换2个值"><a href="#交换2个值" class="headerlink" title="交换2个值"></a>交换2个值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const [post, comments] = Promise.all([</span><br><span class="line">  fetch(&apos;/post&apos;),</span><br><span class="line">  fetch(&apos;/comments&apos;)</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-Array-的方法"><a href="#使用-Array-的方法" class="headerlink" title="使用 Array 的方法"></a>使用 Array 的方法</h2><p>可以通过 (…) 扩展运算符将 Set 转换成 Array 这样我们就可以在 Set 使用所有 Array 的方法了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let mySet = newSet([1,2, 3, 4, 5])</span><br><span class="line">const filtered = [...mySet].filter((x) =&gt; x &gt; 3) // [4, 5]</span><br></pre></td></tr></table></figure>
+
+<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><h2 id="使用-set-来对数组去重"><a href="#使用-set-来对数组去重" class="headerlink" title="使用 set 来对数组去重"></a>使用 set 来对数组去重</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1, 1, 2, 2, 3, 3]</span><br><span class="line">let deduped = [...new Set(arr)] // [1, 2, 3]</span><br><span class="line">let deduped = Array.from(new Set(arr))</span><br></pre></td></tr></table></figure>
+
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><h2 id="使用对象初始化-Map-实例"><a href="#使用对象初始化-Map-实例" class="headerlink" title="使用对象初始化 Map 实例"></a>使用对象初始化 Map 实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; a: 1, b: 1, c: 1 &#125;</span><br><span class="line">map = new Map(Object.entries(obj))</span><br><span class="line">console.log(map.get(&apos;a&apos;)) // 1</span><br><span class="line">console.log(map.get(&apos;b&apos;))</span><br><span class="line">console.log(map.get(&apos;c&apos;))</span><br></pre></td></tr></table></figure>
+
+<h1 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h1><p>如果这样做的话：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const string = `First</span><br><span class="line">                Second`</span><br></pre></td></tr></table></figure>
+<p>那么它会创建出像下面的字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">First</span><br><span class="line">                Second</span><br></pre></td></tr></table></figure>
+<p>有一个简单的方法可以修复这个问题，只需要将第一行置为空，然后添加了右边的翻译好后调用一个 trim() 方法，就可以消除第一个字符前的所有空格：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const string = `</span><br><span class="line">First</span><br><span class="line">Second`.trim()</span><br></pre></td></tr></table></figure>
+
+<h1 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h1><h2 id="Object-is-确定两个值是不是同一个"><a href="#Object-is-确定两个值是不是同一个" class="headerlink" title="Object.is() 确定两个值是不是同一个"></a>Object.is() 确定两个值是不是同一个</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.is(a, b)</span><br></pre></td></tr></table></figure>
+
+<h1 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h1><p>用在字符串上的时候，展开操作符会以字符串中的每一个字符创建一个数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const hey = &apos;hey&apos;</span><br><span class="line">const arrayized = [...hey] // [&apos;h&apos;, &apos;e&apos;, &apos;y&apos;]</span><br></pre></td></tr></table></figure>
+<h2 id="不定参数"><a href="#不定参数" class="headerlink" title="不定参数"></a>不定参数</h2><p>在之前的语法规范中，你只能通过<code>fn.apply(null, arr)</code>的方式来实现，但是这种方式不是很友好和易读。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const arr = [1, 3, 0, -1, 20, 100]</span><br><span class="line">Math.max.apply(null, arr) // 100</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const array = [1, 2, 3, 4, 5]</span><br><span class="line">function fn() &#123;</span><br><span class="line">  console.log(arguments)</span><br><span class="line">&#125;</span><br><span class="line">fn.apply(null, array) // Arguments(5) [0: 1, 1: 2, 2: 3, 3: 4, 4: 5]</span><br></pre></td></tr></table></figure>
+<p>现在，剩余参数（rest element）在和数组解构（array destructuring）搭配使用来实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const array = [1, 2, 3, 4, 5]</span><br><span class="line">const fn = (foo, bar, ...rest) =&gt; &#123;</span><br><span class="line">  console.log(rest)</span><br><span class="line">  console.log(...arguments)</span><br><span class="line">&#125;</span><br><span class="line">fn(...array)  // [3, 4, 5]</span><br></pre></td></tr></table></figure>
+<p>箭头函数没有 arguments</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const array = [1, 2, 3, 4, 5]</span><br><span class="line">function fn() &#123;</span><br><span class="line">  console.log(...arguments)</span><br><span class="line">&#125;</span><br><span class="line">fn(...array)  // 1 2 3 4 5</span><br></pre></td></tr></table></figure>
+
+<h1 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h1><p>一个解释generator如何工作的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function *calculator(input) &#123;</span><br><span class="line">  var doubleThat = 2 * (yield (input / 2))</span><br><span class="line">  var another = yield (doubleThat)</span><br><span class="line">  return (input * doubleThat * another)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们先初始化它：``</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const calc = calculator(10)</span><br></pre></td></tr></table></figure>
+<p>然后我们在generator中开始进行iterator迭代：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">calc.next()</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">&#123;</span><br><span class="line">  done: false,</span><br><span class="line">  value: 5</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体过程如下：代码运行了函数，并把<code>input=10</code>传入到生成器构造函数中，该函数一直运行直到抵达 yield，并返回 yield 输出的内容: <code>input / 2 = 5</code>，因此，我们得到的值为5，并告知迭代器还没有 done (函数只是暂停了)。  </p>
+<p>在第二个迭代处，我们输入7：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  done: false</span><br><span class="line">  value: 14</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>7被作为 doubleThat 的值，注意：你可能会把<code>input/2</code>作为输入参数，但这只是第一次迭代的返回值。现在我们忽略它，使用新的输入值7，并将其乘以2。<br>然后，我们得到第二个 yield 的值，它返回 doubleThat，因此返回值为14。  </p>
+<p>之后，也是最后一个迭代器，我们输入100：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">calc.next(100)</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">&#123;</span><br><span class="line">  done: true</span><br><span class="line">  value: 14000</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当迭代器完成时(没有更多的 yield 关键字)，我们返回 input doubleThat another，这相当于<code>10 * 14 * 100</code>。</p>
+
+    </div>
+
+  </article>
+  <div class="toc-container">
+    
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#对象解构"><span class="toc-text">对象解构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#移除不想要的属性"><span class="toc-text">移除不想要的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在函数参数中使用嵌套对象解构"><span class="toc-text">在函数参数中使用嵌套对象解构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#合并对象"><span class="toc-text">合并对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#根据条件添加对象属性"><span class="toc-text">根据条件添加对象属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解构原始数据"><span class="toc-text">解构原始数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#合并对象数组"><span class="toc-text">合并对象数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组映射"><span class="toc-text">数组映射</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组的解构"><span class="toc-text">数组的解构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#交换2个值"><span class="toc-text">交换2个值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Array-的方法"><span class="toc-text">使用 Array 的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-set-来对数组去重"><span class="toc-text">使用 set 来对数组去重</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Map"><span class="toc-text">Map</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用对象初始化-Map-实例"><span class="toc-text">使用对象初始化 Map 实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模板字符串"><span class="toc-text">模板字符串</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对象方法"><span class="toc-text">对象方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-is-确定两个值是不是同一个"><span class="toc-text">Object.is() 确定两个值是不是同一个</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩展运算符"><span class="toc-text">扩展运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#不定参数"><span class="toc-text">不定参数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Generator"><span class="toc-text">Generator</span></a></li></ol>
+  </div>
+
+
+  </div>
+</div>
+  
+    <div class="post-nav">
+      <div class="post-nav-item post-nav-next">
+        
+          <span>〈 </span>
+          <a href="/2019/05/06/Vue-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" rel="next" title="Vue 基本概念">
+          Vue 基本概念
+          </a>
+        
+      </div>
+  
+      <div class="post-nav-item post-nav-prev">
+          
+          <a href="/2019/07/14/hexo%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="Hexo博客系统分类和标签的使用">
+            Hexo博客系统分类和标签的使用
+          </a>
+          <span>〉</span>
+        
+      </div>
+    </div>
+  
+
+    </div>
+
+    
+
+  </div>
+  <footer class="footer text-center">
+    <div id="bottom-inner">
+        <a class="bottom-item" href="https://www.shangkaii.com" target="_blank" rel="noopener">首页</a> |
+        <a class="bottom-item" href="http://www.beian.miit.gov.cn" target="_blank">豫ICP备16031749号</a> |
+        <a class="bottom-item" href="https://hexo.io" target="_blank">Powered by hexo</a>
+    </div>
+</footer>
+  
+
+<script>
+  (function(window, document, undefined) {
+
+    var timer = null;
+
+    function returnTop() {
+      cancelAnimationFrame(timer);
+      timer = requestAnimationFrame(function fn() {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(timer);
+        }
+      });
+    }
+
+    var hearts = [];
+    window.requestAnimationFrame = (function() {
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function(callback) {
+          setTimeout(callback, 1000 / 60);
+        }
+    })();
+    init();
+
+    function init() {
+      css(".heart{z-index:9999;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: absolute;}.heart:after{top: -5px;}.heart:before{left: -5px;}");
+      attachEvent();
+      gameloop();
+      addMenuEvent();
+    }
+
+    function gameloop() {
+      for (var i = 0; i < hearts.length; i++) {
+        if (hearts[i].alpha <= 0) {
+          document.body.removeChild(hearts[i].el);
+          hearts.splice(i, 1);
+          continue;
+        }
+        hearts[i].y--;
+        hearts[i].scale += 0.004;
+        hearts[i].alpha -= 0.013;
+        hearts[i].el.style.cssText = "left:" + hearts[i].x + "px;top:" + hearts[i].y + "px;opacity:" + hearts[i].alpha + ";transform:scale(" + hearts[i].scale + "," + hearts[i].scale + ") rotate(45deg);background:" + hearts[i].color;
+      }
+      requestAnimationFrame(gameloop);
+    }
+
+    /**
+     * 给logo设置点击事件
+     * 
+     * - 回到顶部
+     * - 出现爱心
+     */
+    function attachEvent() {
+      var old = typeof window.onclick === "function" && window.onclick;
+      var logo = document.getElementById("logo");
+      if (logo) {
+        logo.onclick = function(event) {
+          returnTop();
+          old && old();
+          createHeart(event);
+        }
+      }
+      
+    }
+
+    function createHeart(event) {
+      var d = document.createElement("div");
+      d.className = "heart";
+      hearts.push({
+        el: d,
+        x: event.clientX - 5,
+        y: event.clientY - 5,
+        scale: 1,
+        alpha: 1,
+        color: randomColor()
+      });
+      document.body.appendChild(d);
+    }
+
+    function css(css) {
+      var style = document.createElement("style");
+      style.type = "text/css";
+      try {
+        style.appendChild(document.createTextNode(css));
+      } catch (ex) {
+        style.styleSheet.cssText = css;
+      }
+      document.getElementsByTagName('head')[0].appendChild(style);
+    }
+
+    function randomColor() {
+      // return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + ")";
+      return "#F44336";
+    }
+
+    function addMenuEvent() {
+      var menu = document.getElementById('menu-main-post');
+      if (menu) {
+        var toc = document.getElementById('toc');
+        if (toc) {
+          menu.onclick = function() {
+            if (toc) {
+              if (toc.style.display == 'block') {
+                toc.style.display = 'none';
+              } else {
+                toc.style.display = 'block';
+              }
+            }
+          };
+        } else {
+          menu.style.display = 'none';
+        }
+      }
+    }
+
+  })(window, document);
+</script>
+
+  
+
+
+
+</body>
+</html>
